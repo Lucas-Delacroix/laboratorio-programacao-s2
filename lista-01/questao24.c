@@ -1,13 +1,11 @@
 #include <stdio.h>
 
-// Função para calcular x elevado a n usando operadores binários
-int power(int x, int n) {
-    if (n == 0)
-        return 1;
-    else if (n % 2 == 0)
-        return power(x, n / 2) * power(x, n / 2);
-    else
-        return x * power(x, n / 2) * power(x, n / 2);
+
+void print_binary(unsigned int number) {
+    if (number >> 1) {
+        print_binary(number >> 1);
+    }
+    putc((number & 1) ? '1' : '0', stdout);
 }
 
 int main() {
@@ -17,10 +15,18 @@ int main() {
     printf("Digite o valor de n: ");
     scanf("%d", &n);
 
-    // Calculando o produto de x por 2 elevado a n
-    int result = x * power(2, n);
+    // Calcula 2 elevado a n usando deslocamento à esquerda
+    int resultado = x << n;
+    
+    // Exibindo os binários para demonstração da operação de deslocamento
+    print_binary(x);
+    printf("\n");
+    print_binary(n);
+    printf("\n");
+    print_binary(resultado);
+    printf("\n");
 
-    printf("O produto de %d por 2 elevado a %d é %d\n", x, n, result);
+    printf("\nO produto de x por 2 elevado a n é: %d\n", resultado);
 
     return 0;
 }
